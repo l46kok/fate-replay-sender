@@ -11,6 +11,7 @@ namespace Fate.FTPReplaySender.Utility
         public string FTPAddr { get; set; }
         public string FTPUserName { get; set; }
         public string FTPPassword { get; set; }
+        public int ParseTimePeriod { get; set; }
 
         private string _configFilePath;
         private readonly List<string> _fileContent = new List<string>();
@@ -32,8 +33,13 @@ namespace Fate.FTPReplaySender.Utility
         {
             ReplayPath = GetConfigString("replaypath");
             FTPAddr = GetConfigString("ftpaddr");
-            ReplayPath = GetConfigString("ftpusername");
-            ReplayPath = GetConfigString("ftppassword");
+            FTPUserName = GetConfigString("ftpusername");
+            FTPPassword = GetConfigString("ftppassword");
+            int parsedInt;
+            if (int.TryParse(GetConfigString("parsetimeperiod"), out parsedInt))
+            {
+                ParseTimePeriod = parsedInt;
+            }
         }
 
         private string GetConfigString(string key)
